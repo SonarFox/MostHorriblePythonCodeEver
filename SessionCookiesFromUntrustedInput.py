@@ -14,18 +14,23 @@ app = Flask(__name__)
 def welcome():
     return "Welcome to the Flask Web Server!"
 
-# main driver function
-if __name__ == '__main__':
-
-    # run() method of Flask class runs the application
-    # on the local development server.
-    app.run()
-
 @app.route('/login', methods=['POST'])
 def login():
 
-    user_id = request.form.get('user_id')
-    response = make_response("Logged in")
-    response.set_cookie('session_id', user_id)  # Vulnerable: setting session cookie from untrusted input
-    return response
+    # Get the UserId from the request arguments
+    user_id = request.args.get('UserId')
 
+    if user_id:
+        # Create a response object
+        resp = make_response(f"Cookie is set for UserId: {user_id}")
+
+        # Set a cookie with the UserId
+        resp.set_cookie('UserId', user_id)
+
+        return resp
+    else:
+        return "UserId not provided", 400
+
+# main driver function
+if __name__ == '__main__':
+    app.run()
