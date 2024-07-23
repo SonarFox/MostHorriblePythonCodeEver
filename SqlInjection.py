@@ -35,8 +35,6 @@ if __name__ == '__main__':
         cursor.execute(query)
         result = cursor.fetchone()
 
-        data = request.args.get("data", "")
-        app.logger.critical("%s", data)  # Noncompliant
 
         # Rest of the login logic
         ...

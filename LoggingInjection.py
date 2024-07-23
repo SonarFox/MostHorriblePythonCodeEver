@@ -1,20 +1,31 @@
-import logging
+# Importing flask module in the project is mandatory
+# An object of Flask class is our WSGI application.
 from flask import Flask, request
 
+# Flask constructor takes the name of
+# current module (__name__) as argument.
 app = Flask(__name__)
 
-# Setup logger
-handler = logging.StreamHandler()
-formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-handler.setFormatter(formatter)
-app.logger.addHandler(handler)
-app.logger.setLevel(logging.INFO)
+# The route() function of the Flask class is a decorator,
+# which tells the application which URL should call
+# the associated function.
+@app.route('/')
+# '/' URL is bound with welcome() function.
+def welcome():
+    return "Welcome to the Flask Web Server!"
 
-@app.route('/example')
-def log():
-    data = request.args.get("data", "")
-    app.logger.critical("%s", data)  # Noncompliant
-    return "Logged data"
+# main driver function
+if __name__ == '__main__':
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    # run() method of Flask class runs the application
+    # on the local development server.
+    app.run()
+
+    @app.route('/login', methods=['POST'])
+    def login():
+
+        data = request.args.get("data", "")
+        app.logger.critical("%s", data)  # Noncompliant
+
+        # Rest of the login logic
+        ...
