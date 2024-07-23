@@ -16,5 +16,5 @@ def welcome():
     return "Welcome to the Flask Web Server!"
 
 if __name__ == "__main__":
-    data = request.args.get("data", "")
+    data = request.args.get("data")
     buffer = bytearray(len(data) * 1024 * 1024)
