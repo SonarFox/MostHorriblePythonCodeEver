@@ -9,3 +9,4 @@ class ReqHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", params.get('accept')[0]) # Noncompliant
         self.end_headers()
         self.wfile.write(bytes("Hello World!", "utf-8"))
+        return
