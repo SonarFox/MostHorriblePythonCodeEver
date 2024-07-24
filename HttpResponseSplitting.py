@@ -1,12 +1,11 @@
-from flask import Flask, request
+from http.server import BaseHTTPRequestHandler
+from urllib.parse import urlparse, parse_qs
 
-app = Flask(__name__)
-
-@app.route('/search')
-def search():
-    query = request.args.get('q')
-    test = "test"
-    return f"<h1>Search Results for: {query}</h1>"
-
-if __name__ == "__main__":
-    app.run(debug=True)
+class ReqHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        parsed = urlparse(self.path)
+        params = parse_qs(parsed.query)
+        self.send_response(200)
+        self.send_header("Content-Type", params.get('accept')[0]) # Noncompliant
+        self.end_headers()
+        self.wfile.write(bytes("Hello World!", "utf-8"))
