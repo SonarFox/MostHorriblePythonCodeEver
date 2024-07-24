@@ -6,6 +6,6 @@ class ReqHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         params = parse_qs(parsed.query)
         self.send_response(200)
-        self.send_header("Content-Type", params.get('accept')[0]) # Noncompliant
+        self.send_header("Content-Type", params.get('accept')[0]) # Noncompliant line
         self.end_headers()
         self.wfile.write(bytes("Hello World!", "utf-8"))
