@@ -2,6 +2,7 @@
 # An object of Flask class is our WSGI application.
 from flask import Flask, request
 
+#
 # Flask constructor takes the name of
 # current module (__name__) as argument.
 app = Flask(__name__)
